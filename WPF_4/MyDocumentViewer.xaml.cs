@@ -1,16 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
+﻿using System.Windows;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace WPF_4
 {
@@ -19,9 +8,18 @@ namespace WPF_4
     /// </summary>
     public partial class MyDocumentViewer : Window
     {
+        Color fontColor = Colors.Black;
         public MyDocumentViewer()
         {
             InitializeComponent();
+            fontColorPicker.SelectedColor = fontColor;
+
+            foreach (FontFamily fontFamily in Fonts.SystemFontFamilies)
+            {
+                fontFamilyComboBox.Items.Add(fontFamily.Source);
+            }
+            fontFamilyComboBox.SelectedItem = "DFPBiaoKaiShu-B5";
+            //或者fontFamilyComboBox.
         }
     }
 }
