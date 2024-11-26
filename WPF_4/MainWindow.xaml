@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_4"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="小作家ver_1" Height="450" Width="800">
     <Grid>
-        
+        <Button Content="開啟新文件" HorizontalAlignment="Left" Margin="145,80,0,0" VerticalAlignment="Top" Height="75" Width="160" FontSize="24" FontFamily="DFPBiaoKaiShu-B5" FontWeight="Bold" Click="Button_Click"/>
+
     </Grid>
 </Window>

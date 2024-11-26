@@ -10,25 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace WPF_4
 {
     /// <summary>
-    /// MainWindow.xaml 的互動邏輯
+    /// MyDocumentViewer.xaml 的互動邏輯
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MyDocumentViewer : Window
     {
-        public MainWindow()
+        public MyDocumentViewer()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            MyDocumentViewer myDocumentViewer = new MyDocumentViewer();
-            myDocumentViewer.Show();//Show有從屬關係(可開多個檔案) ShowDialog無從屬關係(關閉檔案才能再開新檔案)
         }
     }
 }
