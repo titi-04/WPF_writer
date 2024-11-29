@@ -7,19 +7,24 @@
         xmlns:local="clr-namespace:WPF_4"
         mc:Ignorable="d"
         Title="MyDocumentViewer" Height="450" Width="800">
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.New" Executed="NewCommand_Executed"/>
+        <CommandBinding Command="ApplicationCommands.Open" Executed="OpenCommand_Executed"/>
+        <CommandBinding Command="ApplicationCommands.Save" Executed="SaveCommand_Executed"/>
+    </Window.CommandBindings>
     <DockPanel>
         <ToolBarTray Height="40" VerticalAlignment="Top" HorizontalAlignment="Left" DockPanel.Dock="Top" Background="Bisque">
-            <ToolBar x:Name="applicationToolBar" Height="40" Width="175" Background="Ivory">
-                <Button x:Name="newButton" Height="38" Width="38">
+            <ToolBar x:Name="applicationToolBar" Height="40" Width="180" Background="Ivory" Margin="0,2,0,1">
+                <Button x:Name="newButton" Command="ApplicationCommands.New" Height="38" Width="38">
                     <Image Width="30" Height="30" Source="/new.png"/>
                 </Button>
-                <Button>
-                    <Image Width="30" Height="30" Source="/open.png" />
+                <Button x:Name="openButton" Command="ApplicationCommands.Open" Height="38" Width="38">
+                    <Image Width="30" Height="30" Source="/open.png"/>
                 </Button>
-                <Button>
-                    <Image Width="30" Height="30" Source="/save.png" />
+                <Button x:Name="saveButton" Command="ApplicationCommands.Save" Height="38" Width="38">
+                    <Image Width="30" Height="30" Source="/save.png"/>
                 </Button>
-                <Button>
+                <Button x:Name="trashButton" Height="38" Width="38">
                     <Image Width="30" Height="30" Source="/trash.png"/>
                 </Button>
             </ToolBar>
