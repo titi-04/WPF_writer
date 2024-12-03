@@ -41,5 +41,49 @@ namespace WPF_4
         {
 
         }
+
+        private void fontColorPicker_SelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<Color?> e)
+        {
+            fontColor = (Color)e.NewValue;
+            SolidColorBrush fontBrush = new SolidColorBrush(fontColor);
+            rtbEditor.Selection.ApplyPropertyValue(TextElement.ForegroundProperty, fontBrush);
+        }
+
+        private void fontFamilyComboBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            if (fontFamilyComboBox.SelectedItem != null)
+            {
+                rtbEditor.Selection.ApplyPropertyValue(TextElement.FontFamilyProperty, fontFamilyComboBox.SelectedItem);
+            }
+        }
+
+        private void fontSizeComboBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            if (fontSizeComboBox.SelectedItem != null)
+            {
+                rtbEditor.Selection.ApplyPropertyValue(TextElement.FontSizeProperty, fontSizeComboBox.SelectedItem);
+            }
+        }
+
+        private void rtbEditor_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            var property_bold = rtbEditor.Selection.GetPropertyValue(TextElement.FontWeightProperty);
+            boldButton.IsChecked = (property_bold != DependencyProperty.UnsetValue) && (property_bold.Equals(FontWeights.Bold));
+
+            var property_italic = rtbEditor.Selection.GetPropertyValue(TextElement.FontStyleProperty);
+            italicButton.IsChecked = (property_italic != DependencyProperty.UnsetValue) && (property_italic.Equals(FontStyles.Italic));
+
+            var property_underline = rtbEditor.Selection.GetPropertyValue(Inline.TextDecorationsProperty);
+            underlineButton.IsChecked = (property_underline != DependencyProperty.UnsetValue) && (property_underline.Equals(TextDecorations.Underline));
+
+            var property_fontFamily = rtbEditor.Selection.GetPropertyValue(TextElement.FontFamilyProperty);
+            fontFamilyComboBox.SelectedItem = property_fontFamily.ToString();
+
+            var property_fontSize = rtbEditor.Selection.GetPropertyValue(TextElement.FontSizeProperty);
+            fontSizeComboBox.SelectedItem = property_fontSize;
+
+            var property_fontColor = rtbEditor.Selection.GetPropertyValue(TextElement.ForegroundProperty);
+            fontColorPicker.SelectedColor = ((SolidColorBrush)property_fontColor).Color;
+        }
     }
 }
