@@ -43,7 +43,7 @@
                 <ComboBox x:Name="fontSizeComboBox" HorizontalAlignment="Left" VerticalAlignment="Center" Height="30" Width="50" Margin="10,0,1,0" SelectionChanged="fontSizeComboBox_SelectionChanged"/>
             </ToolBar>
         </ToolBarTray>
-        <RichTextBox x:Name="rtbEditor" Background="#FFF7F7D4" SelectionChanged="rtbEditor_SelectionChanged">
+        <RichTextBox x:Name="rtbEditor" Background="#FFF7F7D4" SelectionChanged="rtbEditor_SelectionChanged" TextChanged="rtbEditor_TextChanged">
             <FlowDocument/>
         </RichTextBox>
     </DockPanel>
