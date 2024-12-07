@@ -12,17 +12,18 @@ namespace WPF_4
     /// </summary>
     public partial class MyDocumentViewer : Window
     {
-        Color fontColor = Colors.Black;
+        Color fontColor = Colors.Black;//字型顏色 預設黑色
         public MyDocumentViewer()
         {
             InitializeComponent();
-            fontColorPicker.SelectedColor = fontColor;
+            fontColorPicker.SelectedColor = fontColor;//先把字型填滿顏色
 
+            //將系統中的每一個字型(FontFamily)加入
             foreach (FontFamily fontFamily in Fonts.SystemFontFamilies)
             {
                 fontFamilyComboBox.Items.Add(fontFamily.Source);
             }
-            fontFamilyComboBox.SelectedItem = "DFPBiaoKaiShu-B5";
+            fontFamilyComboBox.SelectedItem = "DFPBiaoKaiShu-B5";//預設字型
             //或者fontFamilyComboBox.SelectedIndex = 10;
             fontSizeComboBox.ItemsSource = new List<double>() { 8, 9, 10, 12, 14, 16, 18, 20, 22, 24, 32, 40, 50, 60, 80, 100 };
             fontSizeComboBox.SelectedIndex = 3;//預設值
