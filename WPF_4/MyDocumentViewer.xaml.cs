@@ -37,33 +37,39 @@ namespace WPF_4
 
         private void OpenCommand_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
         {
+            //開啟檔案
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Rich Text Format (*.rtf)|*.rtf|All Files (*.*)|*.*";
-            openFileDialog.DefaultExt = ".rtf";
-            openFileDialog.AddExtension = true;
+            openFileDialog.DefaultExt = ".rtf";//預設副檔名
+            openFileDialog.AddExtension = true;//自動加副檔名
 
+            //如果有打開檔案
             if (openFileDialog.ShowDialog() == true)
             {
-                FileStream fileStream = new FileStream(openFileDialog.FileName, FileMode.Open);
-                TextRange range = new TextRange(rtbEditor.Document.ContentStart, rtbEditor.Document.ContentEnd);
-                range.Load(fileStream, DataFormats.Rtf);
-                fileStream.Close();
+                //讀取檔案
+                FileStream fileStream = new FileStream(openFileDialog.FileName, FileMode.Open);//開啟檔案
+                TextRange range = new TextRange(rtbEditor.Document.ContentStart, rtbEditor.Document.ContentEnd);//範圍是從開始到結束
+                range.Load(fileStream, DataFormats.Rtf);//讀取範圍
+                fileStream.Close();//關閉檔案
             }
         }
 
         private void SaveCommand_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
         {
+            //儲存檔案
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "Rich Text Format (*.rtf)|*.rtf|All Files (*.*)|*.*";
-            saveFileDialog.DefaultExt = ".rtf";
-            saveFileDialog.AddExtension = true;
+            saveFileDialog.DefaultExt = ".rtf";//預設副檔名
+            saveFileDialog.AddExtension = true;//自動加副檔名
 
-            if(saveFileDialog.ShowDialog() == true)
-            { 
-                TextRange range = new TextRange(rtbEditor.Document.ContentStart, rtbEditor.Document.ContentEnd);
-                FileStream fileStream = new FileStream(saveFileDialog.FileName, FileMode.Create);
-                range.Save(fileStream, DataFormats.Rtf);
-                fileStream.Close();
+            //如果有打開檔案
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                //取得範圍
+                TextRange range = new TextRange(rtbEditor.Document.ContentStart, rtbEditor.Document.ContentEnd);//範圍是從開始到結束
+                FileStream fileStream = new FileStream(saveFileDialog.FileName, FileMode.Create);//建立檔案
+                range.Save(fileStream, DataFormats.Rtf);//儲存範圍
+                fileStream.Close();//關閉檔案
             }
         }
 
@@ -93,31 +99,35 @@ namespace WPF_4
             }
         }
 
+        //將每一個不同的property同步反應到相對應的UI元件
         private void rtbEditor_SelectionChanged(object sender, RoutedEventArgs e)
         {
-            //var可自動判斷型別
+            //var可自動判斷型別 //Selection是選取的範圍 //GetPropertyValue取得屬性值
             var property_bold = rtbEditor.Selection.GetPropertyValue(TextElement.FontWeightProperty);
             boldButton.IsChecked = (property_bold != DependencyProperty.UnsetValue) && (property_bold.Equals(FontWeights.Bold));
-            //GetPropertyValue取得性質
+            //有按下去稱IsChecked //不是預設值稱UnsetValue 所以!=UnsetValue就是有設定值 //判斷是否有粗體
+
             var property_italic = rtbEditor.Selection.GetPropertyValue(TextElement.FontStyleProperty);
             italicButton.IsChecked = (property_italic != DependencyProperty.UnsetValue) && (property_italic.Equals(FontStyles.Italic));
+            //判斷是否有斜體
 
             var property_underline = rtbEditor.Selection.GetPropertyValue(Inline.TextDecorationsProperty);
             underlineButton.IsChecked = (property_underline != DependencyProperty.UnsetValue) && (property_underline.Equals(TextDecorations.Underline));
+            //判斷是否有底線
 
             var property_fontFamily = rtbEditor.Selection.GetPropertyValue(TextElement.FontFamilyProperty);
             fontFamilyComboBox.SelectedItem = property_fontFamily.ToString();
 
             var property_fontSize = rtbEditor.Selection.GetPropertyValue(TextElement.FontSizeProperty);
             fontSizeComboBox.SelectedItem = property_fontSize;
-
+            
             var property_fontColor = rtbEditor.Selection.GetPropertyValue(TextElement.ForegroundProperty);
             fontColorPicker.SelectedColor = ((SolidColorBrush)property_fontColor).Color;
         }
 
         private void trashButton_Click(object sender, RoutedEventArgs e)
         {
-            rtbEditor.Document.Blocks.Clear();
+            rtbEditor.Document.Blocks.Clear();//清空文件
         }
     }
 }
