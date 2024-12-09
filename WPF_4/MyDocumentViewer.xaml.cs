@@ -69,9 +69,10 @@ namespace WPF_4
 
         private void fontColorPicker_SelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<Color?> e)
         {
-            fontColor = (Color)e.NewValue;
-            SolidColorBrush fontBrush = new SolidColorBrush(fontColor);
+            fontColor = (Color)e.NewValue;//改變後得新的值
+            SolidColorBrush fontBrush = new SolidColorBrush(fontColor);//用顏色產生筆刷，並將顏色運用到所選文字
             rtbEditor.Selection.ApplyPropertyValue(TextElement.ForegroundProperty, fontBrush);
+            //將rtbEditor.所選擇的文字.應用這個文字(前景)的屬性.設定為fontBrush
         }
 
         private void fontFamilyComboBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
@@ -79,6 +80,7 @@ namespace WPF_4
             if (fontFamilyComboBox.SelectedItem != null)
             {
                 rtbEditor.Selection.ApplyPropertyValue(TextElement.FontFamilyProperty, fontFamilyComboBox.SelectedItem);
+                //將rtbEditor.所選擇的文字.應用這個文字(字型)的屬性.設定為fontFamilyComboBox.SelectedItem
             }
         }
 
@@ -87,14 +89,16 @@ namespace WPF_4
             if (fontSizeComboBox.SelectedItem != null)
             {
                 rtbEditor.Selection.ApplyPropertyValue(TextElement.FontSizeProperty, fontSizeComboBox.SelectedItem);
+                //將rtbEditor.所選擇的文字.應用這個文字(字型大小)的屬性.設定為fontSizeComboBox.SelectedItem
             }
         }
 
         private void rtbEditor_SelectionChanged(object sender, RoutedEventArgs e)
         {
+            //var可自動判斷型別
             var property_bold = rtbEditor.Selection.GetPropertyValue(TextElement.FontWeightProperty);
             boldButton.IsChecked = (property_bold != DependencyProperty.UnsetValue) && (property_bold.Equals(FontWeights.Bold));
-
+            //GetPropertyValue取得性質
             var property_italic = rtbEditor.Selection.GetPropertyValue(TextElement.FontStyleProperty);
             italicButton.IsChecked = (property_italic != DependencyProperty.UnsetValue) && (property_italic.Equals(FontStyles.Italic));
 
