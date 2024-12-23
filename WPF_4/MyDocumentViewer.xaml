@@ -6,7 +6,7 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:WPF_4"
         mc:Ignorable="d"
-        Title="MyDocumentViewer" Height="450" Width="800">
+        Title="MyDocumentViewer" Height="500" Width="800">
     <Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.New" Executed="NewCommand_Executed"/>
         <CommandBinding Command="ApplicationCommands.Open" Executed="OpenCommand_Executed"/>
@@ -28,7 +28,7 @@
                     <Image Width="30" Height="30" Source="/trash.png"/>
                 </Button>
             </ToolBar>
-            <ToolBar x:Name="editingToolBar" Width="410" Margin="1,0,0,0">
+            <ToolBar x:Name="editingToolBar" Width="550" Margin="1,0,0,0">
                 <ToggleButton x:Name="boldButton" Command="EditingCommands.ToggleBold" Height="38" Width="38">
                     <Image Width="30" Height="30" Source="/bold.png"/>
                 </ToggleButton>
@@ -41,6 +41,7 @@
                 <xctk:ColorPicker x:Name="fontColorPicker" Width="100" Height="30" VerticalAlignment="Center" DisplayColorAndName="True" SelectedColorChanged="fontColorPicker_SelectedColorChanged"/>
                 <ComboBox x:Name="fontFamilyComboBox" HorizontalAlignment="Left" VerticalAlignment="Center" Height="30" Width="100" Margin="10,0,1,0" SelectionChanged="fontFamilyComboBox_SelectionChanged"/>
                 <ComboBox x:Name="fontSizeComboBox" HorizontalAlignment="Left" VerticalAlignment="Center" Height="30" Width="50" Margin="10,0,1,0" SelectionChanged="fontSizeComboBox_SelectionChanged"/>
+                <xctk:ColorPicker x:Name="backgroundColorPicker" Width="100" Height="30" VerticalAlignment="Center" DisplayColorAndName="True" Margin="10,0,1,0" SelectedColorChanged="backgroundColorPicker_SelectedColorChanged"/>
             </ToolBar>
         </ToolBarTray>
         <RichTextBox x:Name="rtbEditor" Background="#FFF7F7D4" SelectionChanged="rtbEditor_SelectionChanged" >

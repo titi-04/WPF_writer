@@ -13,10 +13,12 @@ namespace WPF_4
     public partial class MyDocumentViewer : Window
     {
         Color fontColor = Colors.Black;//字型顏色 預設黑色
+        Color backgroundColor = Colors.LightSkyBlue;//背景顏色 預設白色
         public MyDocumentViewer()
         {
             InitializeComponent();
             fontColorPicker.SelectedColor = fontColor;//先把字型填滿顏色
+            backgroundColorPicker.SelectedColor = backgroundColor;//先把背景填滿顏色
 
             //將系統中的每一個字型(FontFamily)加入
             foreach (FontFamily fontFamily in Fonts.SystemFontFamilies)
@@ -25,8 +27,10 @@ namespace WPF_4
             }
             fontFamilyComboBox.SelectedItem = "DFPBiaoKaiShu-B5";//預設字型
             //或者fontFamilyComboBox.SelectedIndex = 10;
+
             fontSizeComboBox.ItemsSource = new List<double>() { 8, 9, 10, 12, 14, 16, 18, 20, 22, 24, 32, 40, 50, 60, 80, 100 };
             fontSizeComboBox.SelectedIndex = 3;//預設值
+
         }
 
         private void NewCommand_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
@@ -58,7 +62,7 @@ namespace WPF_4
         {
             //儲存檔案
             SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "Rich Text Format (*.rtf)|*.rtf|All Files (*.*)|*.*";
+            saveFileDialog.Filter = "Rich Text Format (*.rtf)|*.rtf|HTML (*.html)|*.html|All Files (*.*)|*.*";
             saveFileDialog.DefaultExt = ".rtf";//預設副檔名
             saveFileDialog.AddExtension = true;//自動加副檔名
 
@@ -79,6 +83,13 @@ namespace WPF_4
             SolidColorBrush fontBrush = new SolidColorBrush(fontColor);//用顏色產生筆刷，並將顏色運用到所選文字
             rtbEditor.Selection.ApplyPropertyValue(TextElement.ForegroundProperty, fontBrush);
             //將rtbEditor.所選擇的文字.應用這個文字(前景)的屬性.設定為fontBrush
+        }
+
+        private void backgroundColorPicker_SelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<Color?> e)
+        {
+            backgroundColor = (Color)e.NewValue;//改變後得新的值
+            SolidColorBrush backgroundBrush = new SolidColorBrush(backgroundColor);//用顏色產生筆刷，並將顏色運用到所選文字
+            rtbEditor.Background = backgroundBrush;//將rtbEditor的背景設定為backgroundBrush
         }
 
         private void fontFamilyComboBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
